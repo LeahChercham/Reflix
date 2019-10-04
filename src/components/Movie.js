@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 class Movie extends Component {
 
     handleRented = (e) => {
-        debugger
         let id = this.props.movie.id
         let action = e.target.name
         this.props.handleRented(id, action)

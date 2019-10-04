@@ -7,12 +7,14 @@ import Header from './components/Header';
 import MovieDetail from './components/MovieDetail';
 import MovieData from './components/constants'
 
+let found = MovieData.slice()
 class App extends Component{
   constructor(){
     super()
     this.state = {
         movieData : MovieData,
         isSomeRented : false,
+        found : found,
     }
 }
 
@@ -33,13 +35,26 @@ class App extends Component{
         })
     }
 }
+
+searchMovie = (searchArray) => {
+  let them = this.state.movieData.map(m => {
+      let title = m.title.toLowerCase()
+      if(title.includes(searchArray)){
+          return m
+      }
+  }
+  )
+  them = them.filter(t => t != undefined )
+  this.setState({found: them}, ()=> console.log(this.state.found))
+}
+
   render(){
   return (
     <Router>
     <div className="App">
 <Header />
 <Route path="/" exact component={Home} />
-<Route path="/catalog" exact render={() => <Catalog movieData={this.state.movieData} isSomeRented={this.state.isSomeRented} handleRented={this.handleRented}/>}  />
+<Route path="/catalog" exact render={() => <Catalog searchMovie={this.searchMovie} found={this.state.found} movieData={this.state.movieData} isSomeRented={this.state.isSomeRented} handleRented={this.handleRented}/>}  />
 <Route path="/movies/:id" exact render={({match}) => <MovieDetail match={match} movieData={this.state.movieData} />}/>
     </div>
 

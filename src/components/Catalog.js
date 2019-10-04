@@ -6,7 +6,7 @@ class Catalog extends Component {
     constructor(){
         super()
         this.state={
-            search: ""
+            search:"", 
         }
     }
 
@@ -16,25 +16,18 @@ class Catalog extends Component {
     }
 
     searchMovie = () => {
-        let searchArray = this.state.search
-        let movieTitleArray = this.props.movieData.map(m => m.title)
-        let them = movieTitleArray.map(t => {
-        if(t.includes(searchArray)){
-           return t
-        }
-        })
-        console.log(them)       
+        let searchArray = this.state.search.toLowerCase()
+        this.props.searchMovie(searchArray)
     }
 
     render() {
-        console.log(this.props.isSomeRented)
         return (
             <div className="catalog-container">
                 <input type="text" value={this.state.search} onChange={this.handleInput}/>
                 <div>Budget: HardCoded 10$</div>
                 <div>Catalog</div>
-                {this.props.isSomeRented ? <Rented movieData={this.props.movieData} handleRented={this.props.handleRented}/> : <div></div>}
-                <NotRented movieData={this.props.movieData} handleRented={this.props.handleRented}/>                
+                {this.props.isSomeRented ? <Rented movieData={this.props.found} handleRented={this.props.handleRented}/> : <div></div>}
+                <NotRented movieData={this.props.found} handleRented={this.props.handleRented}/>                
             </div>
         );
     }
