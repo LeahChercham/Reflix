@@ -3,10 +3,24 @@ import {Link} from 'react-router-dom'
 
 class Movie extends Component {
 
-    handleRented = (e) => {
+    handleRented = (action) => {
         let id = this.props.movie.id
-        let action = e.target.name
         this.props.handleRented(id, action)
+    }
+
+    handleBudget = (e) => {
+                let action = e.target.name
+        if(action==="add"){
+            if(this.props.budget >= 3){
+               this.props.handleBudget(action)
+               this.handleRented(action)
+            } else {
+                alert("You don't have enough budget")
+            }
+        } else {
+            this.props.handleBudget(action)
+            this.handleRented(action)
+        }
     }
 
     render() {
@@ -18,8 +32,8 @@ class Movie extends Component {
                </Link>
                
                 {this.props.movie.isRented ?
-                     <button name="remove" onClick={this.handleRented}>Delete from rented</button> 
-                     : <button name="add" onClick={this.handleRented}>Add to rented</button> }
+                     <button name="remove" onClick={this.handleBudget}>Delete from rented</button> 
+                     : <button name="add" onClick={this.handleBudget}>Add to rented</button> }
                 
             </div>
         );

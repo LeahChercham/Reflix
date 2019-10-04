@@ -6,7 +6,7 @@ class NotRented extends Component {
         return (
             <div>
                 Not rented:
-               {this.props.movieData.filter(c => c.isRented === false).map(m => <Movie movie={m} handleRented={this.props.handleRented} />)} 
+               {this.props.movieData.filter(c => c.isRented === false).map(m => <Movie movie={m} budget={this.props.budget} handleBudget={this.props.handleBudget} handleRented={this.props.handleRented} />)} 
             </div>
         );
     }
