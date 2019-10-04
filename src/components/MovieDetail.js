@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 
 class MovieDetail extends Component {
     render() {
-       console.log("match " + this.props.match.params.id)
+        let id = this.props.match.params.id
         return (
             <div>
-                <div>Hello</div>
-                {/* <div>{this.props.movie.title}</div>
-                <img src={this.props.movie.img} alt="image of movie"/>
-                <div>{this.props.movie.year}</div>
-                <div>{this.props.movie.descrShort}</div> */}
+                <div>{this.props.movieData[id].title}</div>
+                <img src={this.props.movieData[id].img} alt="image of movie"/>
+                <div>{this.props.movieData[id].year}</div>
+                <div>{this.props.movieData[id].descrShort}</div>
             </div>
         );
     }
