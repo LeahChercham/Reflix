@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 
+import './styles/Movie.css'
+
 class Movie extends Component {
 
     handleRented = (action) => {
@@ -25,16 +27,15 @@ class Movie extends Component {
 
     render() {
         return (
-            <div>
+            <div className="imageButtonContainer">
                 <Link to={`/movies/${this.props.movie.id}`}> 
                 <img src={this.props.movie.img} alt="Movie Poster"/>
-                <div>{this.props.movie.title}</div>
                </Link>
-               
                 {this.props.movie.isRented ?
-                     <button name="remove" onClick={this.handleBudget}>Delete from rented</button> 
-                     : <button name="add" onClick={this.handleBudget}>Add to rented</button> }
+                     <button className="iconButton" name="remove" onClick={this.handleBudget}>-</button>
+                     : <button className="iconButton"  name="add" onClick={this.handleBudget}>+</button> }
                 
+               
             </div>
         );
     }

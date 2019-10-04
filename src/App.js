@@ -44,7 +44,7 @@ searchMovie = (searchArray) => {
       }
   }
   )
-  them = them.filter(t => t != undefined )
+  them = them.filter(t => t !== undefined )
   this.setState({found: them}, ()=> console.log(this.state.found))
 }
 
