@@ -17,19 +17,32 @@ class App extends Component{
         found : found,
         users : [
           {
+            id:0,
             name: "Leah",
-            budget: 100,
+            budget: 50,
+            rentedMovies: [],
+            isLoggedIn: false,
           },
           {
+            id:1,
             name: "Paul",
             budget: 10,
+            rentedMovies: [],
+            isLoggedIn: false,
           },
           {
+            id:2,
             name: "Louise", 
-            budget: 30
+            budget: 30,
+            rentedMovies: [],
+            isLoggedIn: false,
           },
           {
-            name: "Thomas"
+            id:3,
+            name: "Thomas",
+            budget:25,
+            rentedMovies: [],
+            isLoggedIn: false,
           },
         ]
     }
@@ -65,6 +78,12 @@ searchMovie = (searchArray) => {
   this.setState({found: them}, ()=> console.log(this.state.found))
 }
 
+login = (id) => {
+  let users = [...this.state.users]
+  users[id].isLoggedIn = true
+  this.setState({users: users})
+}
+
   render(){
   return (
     <Router>
@@ -72,8 +91,8 @@ searchMovie = (searchArray) => {
 <Header />
 
 <div className="App-main-container">
-<Route path="/" exact render={() => <Home users={this.state.users} />}/>
-<Route path="/catalog" exact render={() => <Catalog searchMovie={this.searchMovie} found={this.state.found} movieData={this.state.movieData} isSomeRented={this.state.isSomeRented} handleRented={this.handleRented}/>}  />
+<Route path="/" exact render={() => <Home users={this.state.users} login={this.login}/>}/>
+<Route path="/catalog" exact render={() => <Catalog users={this.state.users} searchMovie={this.searchMovie} found={this.state.found} movieData={this.state.movieData} isSomeRented={this.state.isSomeRented} handleRented={this.handleRented}/>}  />
 <Route path="/movies/:id" exact render={({match}) => <MovieDetail match={match} movieData={this.state.movieData} />}/>
 </div>
     </div>

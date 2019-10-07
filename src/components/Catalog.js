@@ -6,17 +6,19 @@ class Catalog extends Component {
         super()
         this.state = {
             search: "",
-            budget: 10,
+            user: {},
         }
     }
 
     handleBudget = (action) => {
         if (action === "remove") {
-            let newBudget = this.state.budget+3
-            this.setState({budget : newBudget })
+            let newUser = {...this.state.user}
+            newUser.budget+=3
+            this.setState({user : newUser })
         } else if (action === "add") {
-            let newBudget = this.state.budget-3
-            this.setState({budget : newBudget })
+            let newUser = {...this.state.user}
+            newUser.budget-=3
+            this.setState({user : newUser })
         }
     }
 
@@ -30,17 +32,21 @@ class Catalog extends Component {
         this.props.searchMovie(searchArray)
     }
 
+    async componentDidMount(){
+        let user = this.props.users.find(u => u.isLoggedIn === true)
+        await this.setState({user: user})
+    }
     render() {
         return (
             <div className="catalog-container">
                 <div className="firstRow">
                 Search for a movie: <input id="searchInput" type="text" value={this.state.search} onChange={this.handleInput} />
-                <p>Budget: {this.state.budget}</p>
+                <p>Budget: {this.state.user.budget}</p>
                 <div className="verticalLine"></div>
                 </div>
                 <div>
-                {this.props.isSomeRented ? <Rented budget={this.state.budget} handleBudget={this.handleBudget} movieData={this.props.found} handleRented={this.props.handleRented} /> : <div></div>}
-                <NotRented budget={this.state.budget} movieData={this.props.found} handleBudget={this.handleBudget} handleRented={this.props.handleRented} />
+                {this.props.isSomeRented ? <Rented budget={this.state.user.budget} handleBudget={this.handleBudget} movieData={this.props.found} handleRented={this.props.handleRented} /> : <div></div>}
+                <NotRented budget={this.state.user.budget} movieData={this.props.found} handleBudget={this.handleBudget} handleRented={this.props.handleRented} />
                 </div>
             </div>
         );
