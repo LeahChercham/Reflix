@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 
-import './styles/Movie.css'
-
 class Movie extends Component {
 
     handleRented = (action) => {
@@ -33,8 +31,7 @@ class Movie extends Component {
                </Link>
                 {this.props.movie.isRented ?
                      <button className="iconButton" name="remove" onClick={this.handleBudget}>-</button>
-                     : <button className="iconButton"  name="add" onClick={this.handleBudget}>+</button> }
-                
+                     : <button className="iconButton"  name="add" onClick={this.handleBudget}>+</button> }  
                
             </div>
         );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 class MovieDetail extends Component {
     render() {
         let id = this.props.match.params.id

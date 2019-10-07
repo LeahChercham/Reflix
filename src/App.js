@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import './App.css';
+import './components/styles/All.css'
 import Home from './components/Home';
 import Catalog from './components/Catalog';
 import Header from './components/Header';
@@ -15,6 +15,23 @@ class App extends Component{
         movieData : MovieData,
         isSomeRented : false,
         found : found,
+        users : [
+          {
+            name: "Leah",
+            budget: 100,
+          },
+          {
+            name: "Paul",
+            budget: 10,
+          },
+          {
+            name: "Louise", 
+            budget: 30
+          },
+          {
+            name: "Thomas"
+          },
+        ]
     }
 }
 
@@ -53,9 +70,12 @@ searchMovie = (searchArray) => {
     <Router>
     <div className="App">
 <Header />
-<Route path="/" exact component={Home} />
+
+<div className="App-main-container">
+<Route path="/" exact render={() => <Home users={this.state.users} />}/>
 <Route path="/catalog" exact render={() => <Catalog searchMovie={this.searchMovie} found={this.state.found} movieData={this.state.movieData} isSomeRented={this.state.isSomeRented} handleRented={this.handleRented}/>}  />
 <Route path="/movies/:id" exact render={({match}) => <MovieDetail match={match} movieData={this.state.movieData} />}/>
+</div>
     </div>
 
     </Router>

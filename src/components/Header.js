@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import './styles/Header.css'
 class Header extends Component {
     render() {
         return (
             <div className="header">
-                <Link to="/">Home</Link>
-                <Link to="/catalog">Catalog</Link>
-                <div><img  className="App-logo" src={require("../img/blue-reflix-logo.png")} alt="Reflix"/></div>
+                <Link to="/"><h1>HOME</h1></Link>
+                <Link to="/catalog"><h1>CATALOG</h1></Link> 
+                <h1 id="Logo">REFLIX</h1>
             </div>
+            
         )
     }
 }
